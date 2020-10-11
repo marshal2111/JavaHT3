@@ -148,22 +148,28 @@ public class MyList
             }
         }
 	}
-	
-	public void Sort(){
-		int z = this.length;
-		while (z > 0){
-			for (int i = 0; i < z - 1; i++)
-			{
-				Item a = indexAt(i);
-				Item b = indexAt(i+1);
-				if (a.getValue() > b.getValue())
-				{
-					this.Swap(i, i + 1);
+	public void sort() {
+		int k = 0;
+		Item one;
+		Item two;
+		boolean thatsAll = true;
+		while (thatsAll) {
+			for (int i = 1; i <= this.counter - 1; i++) {
+				one = indexAt(i - 1);
+				two = indexAt(i);
+				if (two.getValue() < one.getValue()) {
+					swap(i - 1, i);
+					k++;
 				}
+
 			}
-			z--;
+			if (k == 0)
+				thatsAll = false;
+			k = 0;
+
 		}
 	}
+
 
 	public Item indexAt(int index){
 		if ((index <= this.length - 1) & (index >= 0)){
