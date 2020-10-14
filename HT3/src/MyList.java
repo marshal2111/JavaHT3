@@ -206,21 +206,21 @@ public class MyList<T> implements Collection<T> {
         }
 	}
 	
-	/*public void Sort(){
-		int z = this.length;
+	public void Sort(){
+		int z = this.getLength();
 		while (z > 0){
 			for (int i = 0; i < z - 1; i++)
 			{
-				a = indexAt(i);
-				b = indexAt(i+1);
-				if ((comp.compare(a, b) > 0))
+				Item <T> a = indexAt(i);
+				Item <T> b = indexAt(i+1);
+				if (comp.compare(a, b) > 0)
 				{
 					this.Swap(i, i + 1);
 				}
 			}
 			z--;
 		}
-	}*/
+	}
 
 	public Item indexAt(int index){
 		if ((index <= this.length - 1) & (index >= 0)){
