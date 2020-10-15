@@ -7,11 +7,11 @@ import java.util.function.Predicate;
 import java.util.stream.Stream;	
 
 public class MyList<T> implements Collection<T> {
-	class Item<T>{
+	class Node<T>{
 		private T value;
-		private Item<T> next;
+		private Node<T> next;
 
-		public Item(T value){
+		public Node(T value){
 			this.value = value;
 			this.next = null;
 		}
@@ -33,11 +33,11 @@ public class MyList<T> implements Collection<T> {
 			this.value = value;
 		}
 
-		public Item<T> getNext(){
+		public Node<T> getNext(){
 			return next;
 		}
 
-		public void setNext(Item<T> next){
+		public void setNext(Node<T> next){
 			this.next = next;
 		}
 
@@ -49,7 +49,7 @@ public class MyList<T> implements Collection<T> {
 	}
 
 	public int length;
-	private Item<T> root;
+	private Node<T> root;
 	private Comparable comp;
 
 	public MyList(Comparable comp){
@@ -63,10 +63,10 @@ public class MyList<T> implements Collection<T> {
 		return length;
 	}
 
-	public Item end(){
+	public Node end(){
 		if (this.root == null)
 			return null;
-		Item<T> p = this.root;
+		Node<T> p = this.root;
 		while (p.hasNext()) {
 			p = p.getNext();
 		}
@@ -74,7 +74,7 @@ public class MyList<T> implements Collection<T> {
 	}
 
 	public T Get(int index){
-		Item<T> p = root;
+		Node<T> p = root;
 		for (int i = 0; i<index; i++){
 			p = p.getNext();
 		}
@@ -114,12 +114,12 @@ public class MyList<T> implements Collection<T> {
 
     @Override
 	public boolean add(T pValue){
-		Item<T> newItem = new Item<T>(pValue);
-		Item<T> iter = this.end();
+		Node<T> newNode = new Node<T>(pValue);
+		Node<T> iter = this.end();
 		if (iter == null) 
-			this.root = newItem;
+			this.root = newNode;
 		else 
-			iter.setNext(newItem);
+			iter.setNext(newNode);
 		this.length += 1;
 
 		return true;
@@ -161,7 +161,7 @@ public class MyList<T> implements Collection<T> {
 			return null;
 		}
 		else {
-			Item<T> iter = this.root;
+			Node<T> iter = this.root;
 			while (iter.hasNext()) {
 				result += iter.toString() + ", ";
 				iter = iter.getNext();
@@ -180,12 +180,12 @@ public class MyList<T> implements Collection<T> {
 			secondPos = tmp;
 		}
 		if (firstPos >= 0) {
-            Item<T> lp = indexAt(firstPos - 1);
-            Item<T> first = indexAt(firstPos);
-            Item<T> rp = indexAt(firstPos + 1);
-            Item<T> lq = indexAt(secondPos - 1);
-            Item<T> second = indexAt(secondPos);
-            Item<T> rq = indexAt(secondPos + 1);
+            Node<T> lp = indexAt(firstPos - 1);
+            Node<T> first = indexAt(firstPos);
+            Node<T> rp = indexAt(firstPos + 1);
+            Node<T> lq = indexAt(secondPos - 1);
+            Node<T> second = indexAt(secondPos);
+            Node<T> rq = indexAt(secondPos + 1);
 
             if (lp != null) {
                 lp.setNext(second);
@@ -211,8 +211,8 @@ public class MyList<T> implements Collection<T> {
 		while (z > 0){
 			for (int i = 0; i < z - 1; i++)
 			{
-				Item <T> a = indexAt(i);
-				Item <T> b = indexAt(i+1);
+				Node <T> a = indexAt(i);
+				Node <T> b = indexAt(i+1);
 				if (comp.compare(a, b) > 0)
 				{
 					this.Swap(i, i + 1);
@@ -222,9 +222,9 @@ public class MyList<T> implements Collection<T> {
 		}
 	}
 
-	public Item indexAt(int index){
+	public Node indexAt(int index){
 		if ((index <= this.length - 1) & (index >= 0)){
-			Item<T> p = root;
+			Node<T> p = root;
 			for (; index>0; --index){
 				p = p.getNext();
 			}
@@ -237,5 +237,5 @@ public class MyList<T> implements Collection<T> {
 }
 
 interface Comparable {
-    int compare(MyList.Item a, MyList.Item b);
+    int compare(MyList.Node a, MyList.Node b);
 }
